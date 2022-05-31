@@ -20,32 +20,30 @@ const (
 	version        = "1.0.0"
 )
 
+//to read the token from env variables
 var (
 	gituser  = os.Getenv("GIT_USER")
 	gittoken = os.Getenv("GIT_TOKEN")
+	token    = os.Getenv("NATS_TOKEN")   //"UfmrJOYwYCCsgQvxvcfJ3BdI6c8WBbnD"
+	natsurl  = os.Getenv("NATS_ADDRESS") //"nats://localhost:4222"
 )
 
 type config struct {
-	port int
-	db   struct {
-		dsn string
-	}
+	port      int
 	nats      string
 	natstoken string
 }
 
 type application struct {
 	config config
-	logger *log.Logger
 	models models.Models
 }
 
 func main() {
 	var cfg config
 	flag.IntVar(&cfg.port, "port", 8000, "Server port to listen on")
-	flag.StringVar(&cfg.db.dsn, "dsn", "tcp://127.0.0.1:9000?debug=true", "clickhouse connection url")
-	flag.StringVar(&cfg.nats, "nats", "nats://localhost:4222", "nats connection url")
-	flag.StringVar(&cfg.natstoken, "natstoken", "UfmrJOYwYCCsgQvxvcfJ3BdI6c8WBbnD", "nats token")
+	flag.StringVar(&cfg.nats, "natsurl", natsurl, "nats connection url")
+	flag.StringVar(&cfg.natstoken, token, "UfmrJOYwYCCsgQvxvcfJ3BdI6c8WBbnD", "nats token")
 	flag.Parse()
 
 	logger := log.New(os.Stdout, "", log.Ldate|log.Ltime)

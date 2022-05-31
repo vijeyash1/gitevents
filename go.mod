@@ -3,6 +3,7 @@ module github.com/vijeyash1/gitevents
 go 1.18
 
 require (
+	github.com/ClickHouse/clickhouse-go v1.5.4
 	github.com/go-git/go-billy/v5 v5.3.1
 	github.com/go-git/go-git/v5 v5.4.2
 	github.com/go-playground/webhooks/v6 v6.0.1
@@ -15,6 +16,7 @@ require (
 	github.com/Microsoft/go-winio v0.4.16 // indirect
 	github.com/ProtonMail/go-crypto v0.0.0-20210428141323-04723f9f07d7 // indirect
 	github.com/acomagu/bufpipe v1.0.3 // indirect
+	github.com/cloudflare/golz4 v0.0.0-20150217214814-ef862a3cdc58 // indirect
 	github.com/emirpasic/gods v1.12.0 // indirect
 	github.com/go-git/gcfg v1.5.0 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
