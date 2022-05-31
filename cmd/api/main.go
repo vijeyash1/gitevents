@@ -8,7 +8,6 @@ import (
 	"os"
 	"time"
 
-	"github.com/go-playground/webhooks/v6/github"
 	"github.com/nats-io/nats.go"
 	"github.com/vijeyash1/gitevents/models"
 )
@@ -19,6 +18,11 @@ const (
 	eventSubject   = "GITMETRICS.event"
 	allSubject     = "GITMETRICS.all"
 	version        = "1.0.0"
+)
+
+var (
+	gituser  = os.Getenv("GIT_USER")
+	gittoken = os.Getenv("GIT_TOKEN")
 )
 
 type config struct {
@@ -34,14 +38,8 @@ type application struct {
 	config config
 	logger *log.Logger
 	models models.Models
-	hook   *github.Webhook
 }
 
-var hook *github.Webhook
-
-func init() {
-	hook, _ = github.New()
-}
 func main() {
 	var cfg config
 	flag.IntVar(&cfg.port, "port", 8000, "Server port to listen on")
@@ -56,8 +54,7 @@ func main() {
 
 	app := &application{
 		config: cfg,
-		models: models.NewModels(js),
-		hook:   hook,
+		models: models.NewModels(js, gituser, gittoken),
 	}
 	srv := &http.Server{
 		Addr:         fmt.Sprintf(":%d", cfg.port),

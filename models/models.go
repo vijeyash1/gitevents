@@ -12,10 +12,12 @@ type Models struct {
 }
 
 // NewModels returns models with db and nats jetsStream pool
-func NewModels(js nats.JetStreamContext) Models {
+func NewModels(js nats.JetStreamContext, user, token string) Models {
 	return Models{
 		DB: DBModel{
-			JS: js},
+			JS:       js,
+			gituser:  user,
+			gittoken: token},
 	}
 }
 

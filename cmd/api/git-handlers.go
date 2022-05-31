@@ -10,9 +10,9 @@ import (
 
 func (app *application) githubHandler(w http.ResponseWriter, r *http.Request) {
 	var release github.PushPayload
-
-	//hook, _ := github.New()
-	payload, err := app.hook.Parse(r, github.PushEvent)
+	var url, repoName string
+	hook, _ := github.New()
+	payload, err := hook.Parse(r, github.PushEvent)
 	if err != nil {
 		if err == github.ErrEventNotFound {
 			// ok event wasn;t one of the ones asked to be parsed
@@ -24,7 +24,10 @@ func (app *application) githubHandler(w http.ResponseWriter, r *http.Request) {
 	case github.PushPayload:
 		release = payload.(github.PushPayload)
 		// Do whatever you want from here...
-		fmt.Printf("%+v", release)
+		fmt.Printf("%s\n", release.Repository.Name)
+		url = release.Repository.HTMLURL
+		repoName = release.Repository.Name
+		app.models.DB.GitPublish(url, repoName, w, r)
 
 	}
 
