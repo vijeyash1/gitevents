@@ -43,7 +43,7 @@ func main() {
 	var cfg config
 	flag.IntVar(&cfg.port, "port", 8000, "Server port to listen on")
 	flag.StringVar(&cfg.nats, "natsurl", natsurl, "nats connection url")
-	flag.StringVar(&cfg.natstoken, token, "UfmrJOYwYCCsgQvxvcfJ3BdI6c8WBbnD", "nats token")
+	flag.StringVar(&cfg.natstoken, "token", token, "nats token")
 	flag.Parse()
 
 	logger := log.New(os.Stdout, "", log.Ldate|log.Ltime)
