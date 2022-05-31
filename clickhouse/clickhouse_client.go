@@ -44,7 +44,7 @@ func CreateGitSchema(connect *sql.DB) {
 func InsertGitEvent(connect *sql.DB, metrics models.Gitevent) {
 	var (
 		tx, _   = connect.Begin()
-		stmt, _ = tx.Prepare("INSERT INTO vijesh (id, commitedBy, commitedAt, repository, commitstat, availablebranches, commitmessage) VALUES (?, ?, ?, ?, ?, ?, ?)")
+		stmt, _ = tx.Prepare("INSERT INTO gitevent (id, commitedBy, commitedAt, repository, commitstat, availablebranches, commitmessage) VALUES (?, ?, ?, ?, ?, ?, ?)")
 	)
 
 	defer stmt.Close()
