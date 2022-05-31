@@ -27,7 +27,7 @@ func GetClickHouseConnection(url string) (*sql.DB, error) {
 
 func CreateGitSchema(connect *sql.DB) {
 	_, err := connect.Exec(`
-		CREATE TABLE IF NOT EXISTS vijesh (
+		CREATE TABLE IF NOT EXISTS gitevent (
 			id                UUID,
 			commitedBy        String,
 			commitedAt        DateTime,
